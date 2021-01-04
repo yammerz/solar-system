@@ -2,6 +2,8 @@
 body {
     padding: 0;
     margin: 0;
+    background: url(images/stars.jpg) repeat;
+    background-size: 25%;
 }
 
 svg:not(:root) {
@@ -31,6 +33,8 @@ svg:not(:root) {
 }
 
 canvas {
-    width: 100vw;
-    height: 100vw;
+/*    width: 1200px;
+    height: 1200px;
+margin:29%;*/
+
 }
