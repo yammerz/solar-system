@@ -57,7 +57,8 @@ const SOLARSYSTEMOBJECTS =
         "SurfacePressure_bars": "0",
         "NumberofMoons": "0",
         "RingSystem?": "No",
-        "GlobalMagneticField?": "Yes"
+        "GlobalMagneticField?": "Yes",
+        "PlanetNumber":1
     },
     "VENUS": {
         "Mass_kg": "4.87e+24",
@@ -79,7 +80,8 @@ const SOLARSYSTEMOBJECTS =
         "SurfacePressure_bars": "92",
         "NumberofMoons": "0",
         "RingSystem?": "No",
-        "GlobalMagneticField?": "No"
+        "GlobalMagneticField?": "No",
+        "PlanetNumber":2
     },
     "EARTH": {
         "Mass_kg": "5.97219e+24",
@@ -101,7 +103,10 @@ const SOLARSYSTEMOBJECTS =
         "SurfacePressure_bars": "1",
         "NumberofMoons": "1",
         "RingSystem?": "No",
-        "GlobalMagneticField?": "Yes"
+        "GlobalMagneticField?": "Yes",
+        "PlanetNumber":3,
+        "Color":"rgba(0, 153, 255, 0.2)"
+    
     },
     "MARS": {
         "Mass_kg": "6.42e+23",
@@ -123,7 +128,8 @@ const SOLARSYSTEMOBJECTS =
         "SurfacePressure_bars": "0.01",
         "NumberofMoons": "2",
         "RingSystem?": "No",
-        "GlobalMagneticField?": "No"
+        "GlobalMagneticField?": "No",
+        "PlanetNumber":4
     },
     "JUPITER": {
         "Mass_kg": "1.898e+27",
@@ -145,7 +151,8 @@ const SOLARSYSTEMOBJECTS =
         "SurfacePressure_bars": "Unknown*",
         "NumberofMoons": "79",
         "RingSystem?": "Yes",
-        "GlobalMagneticField?": "Yes"
+        "GlobalMagneticField?": "Yes",
+        "PlanetNumber":5
     },
     "SATURN": {
         "Mass_kg": "5.68e+26",
@@ -167,7 +174,8 @@ const SOLARSYSTEMOBJECTS =
         "SurfacePressure_bars": "Unknown*",
         "NumberofMoons": "82",
         "RingSystem?": "Yes",
-        "GlobalMagneticField?": "Yes"
+        "GlobalMagneticField?": "Yes",
+        "PlanetNumber":6
     },
     "URANUS": {
         "Mass_kg": "8.68e+25",
@@ -189,7 +197,8 @@ const SOLARSYSTEMOBJECTS =
         "SurfacePressure_bars": "Unknown*",
         "NumberofMoons": "27",
         "RingSystem?": "Yes",
-        "GlobalMagneticField?": "Yes"
+        "GlobalMagneticField?": "Yes",
+        "PlanetNumber":7
     },
     "NEPTUNE": {
         "Mass_kg": "1.0199999999999999e+26",
@@ -211,7 +220,8 @@ const SOLARSYSTEMOBJECTS =
         "SurfacePressure_bars": "Unknown*",
         "NumberofMoons": "14",
         "RingSystem?": "Yes",
-        "GlobalMagneticField?": "Yes"
+        "GlobalMagneticField?": "Yes",
+        "PlanetNumber":8
     },
     "PLUTO": {
         "Mass_kg": "1.46e+22",
@@ -233,8 +243,21 @@ const SOLARSYSTEMOBJECTS =
         "SurfacePressure_bars": "0.00001",
         "NumberofMoons": "5",
         "RingSystem?": "No",
-        "GlobalMagneticField?": "Unknown"
+        "GlobalMagneticField?": "Unknown",
+        "PlanetNumber":9
     }
 };
+
+const ORBITCOLOR = [
+    'rgba(200,150,100,0.2)',  //mercury
+    'rgba(153, 153, 100, 0.2)', //venus
+    'rgba(0, 153, 255, 0.2)', //earth
+    'rgba(255, 0, 0, 0.2)', //mars
+    'rgba(255, 125, 0, 0.2)', //Jupiter
+    'rgba(153, 125, 0, 0.2)', //Saturn
+    'rgba(153, 125, 0, 0.2)', //Neptune
+    'rgba(153, 125, 0, 0.2)', //Uranus
+    'rgba(153, 125, 0, 0.2)' //Pluto
+];
 
 

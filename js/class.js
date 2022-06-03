@@ -1,4 +1,5 @@
 const P = Math.PI;
+const Px2 = P*2;
 const enot = 8.8541878128 * 10 ** -12;// C2/N m2
 const munot = 1.25663706212 * 10 ** -6;// T m/A
 const h = 6.62607015 * 10 ** -34;
@@ -78,4 +79,134 @@ function getParam(param, bool) {
 		}
 	}
 	return null;
+}
+
+
+
+class Planet {
+	constructor(name){
+		
+		this.name = name.toUpperCase();
+		let PLANET = SOLARSYSTEMOBJECTS[this.name];
+
+		for(let prop in PLANET){
+
+		this[prop] = PLANET[prop];
+
+		}
+
+		this.init();
+
+	}
+
+
+	init(){
+
+		let time = new Date();
+		this.image = new Image();
+		this.image.src = `images/${this.name.toLowerCase()}.png`; 
+
+		this.size = this.Diameter_km / SOLARSYSTEMOBJECTS['EARTH'].Diameter_km;
+
+
+		//x middle
+		this.xmid = (window.innerWidth / 2);
+		//y middle
+		this.ymid = (window.innerHeight / 2);
+
+		//distance from sun (center) in pixels
+		//a major radius
+		this.a = 75 * this.PlanetNumber;
+		//b minor radius
+		this.b = this.a * .04;
+
+		var speed = getParam("speed") ? +getParam("speed") : 1;
+    	speed *= 60;
+
+		//Px2 = (6.28...) circle / 60secs = 1 orbit per minute
+		//0 degrees is at the current date
+		this.orbit = (Px2 / speed) * time.getSeconds() + (Px2 / (speed * 1000)) * time.getMilliseconds();
+
+
+		if(this.name.match(/earth/i)){
+			this.moon = new Image();
+			this.moon.src = 'images/moon.png';
+		}
+
+
+	}
+
+	draw(ctx){
+ 
+
+		//millisecond of orbit
+		var ms = Px2 / (+this.RotationPeriod_hours * 60 * 60 * 1000 * this.OrbitalPeriod_days);
+		
+
+		this.newDateTime = new Date(dateTime + Math.round(this.orbit / ms));
+		
+		ctx.save();
+
+
+		//find center
+		ctx.translate(window.innerWidth / 2, window.innerHeight/2);
+
+		//rotate planet
+		ctx.rotate(this.orbit);
+		ctx.translate(this.a - this.#getB(), 0);
+
+		
+		//image, dx, dy, dWidth, dHeight
+		ctx.drawImage(this.image, -6, -6, 12, 12);
+
+		// Moon
+		if(Object.prototype.hasOwnProperty.call(this, 'moon')){
+			this.#moon(ctx);
+		}
+
+
+		ctx.restore();
+
+
+		//draw planet orbit line
+		//thickness relative to planet size
+		ctx.lineWidth = 12*this.size;
+		ctx.strokeStyle = ORBITCOLOR[this.PlanetNumber-1];//blue orbit
+		ctx.beginPath();
+		ctx.ellipse(this.xmid, this.ymid, this.a, this.a-this.b, 0, Math.PI * 2, false); //orbit
+		ctx.stroke();
+	}
+
+	#moon(ctx){
+
+		//earth's shadow is drawn a part of earth and must be set here...
+		ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';//shadow color
+		ctx.fillRect(0, -6, 40, 12); // Shadow area
+
+		var moonOrbit = this.orbit * 12.36;
+
+
+		ctx.rotate(moonOrbit);
+		ctx.translate(0, 28.5);
+		ctx.drawImage(this.moon, -3.5, -3.5,3,3);
+
+		ctx.restore();
+
+	}
+	/**
+	 * Returns b (minor radius) the ellipse amount to subtract from a major radius
+	 * */
+	#getB() {
+
+		//convert radians to sin 
+		var elliptical = Math.abs(Math.sin(this.orbit)),
+
+		//get amount of offset
+		ellipse = this.b * elliptical;
+
+
+		return ellipse;
+	
+	}
+
 }
