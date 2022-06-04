@@ -1,8 +1,6 @@
-﻿//credits
-//https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations
-
-
-//true if is leapyear
+﻿
+//true if leapyear
+//using for calculating orbits???
 Date.prototype.isLeapYear = function () {
     var year = this.getFullYear();
     if ((year & 3) != 0) return false;
@@ -25,24 +23,25 @@ const PLANETS = [
     'EARTH'
 ]; 
 
-var sun = new Image();
-var date = new Date();
-var yyyy = date.getFullYear();
-var m = date.getMonth();
-var d = date.getDate();
-var dateTime = new Date(yyyy, m, d).getTime();
-var animationID; var play = true; var canvas;
+const sun = new Image();
+const canvas = document.querySelector('#canvas');
+const ctx = canvas.getContext('2d');
+
+var animationID; var play = true; 
 
 
 function init() {
-    sun.src = 'images/sun.png';
-    //moon.src = 'images/moon.png';
-    //earth.src = 'images/earth.png';
-    window.requestAnimationFrame(draw);
 
-    canvas = document.querySelector('#canvas');
-    canvas.setAttribute("width", window.innerWidth);
-    canvas.setAttribute("height", window.innerHeight);
+    //set canvas to full width and height
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+    
+    sun.src = 'images/sun.png';
+    
+    //initialize the animation
+    window.requestAnimationFrame(animate);
+
+
     
 }
 
@@ -50,83 +49,48 @@ function init() {
 
 
 var time;
-function draw() {
-    var ctx = document.getElementById('canvas').getContext('2d');
-    var xs = (window.innerWidth / 2) - (36 / 2);
-    var ys = (window.innerHeight / 2) - (36 / 2);
+function animate() {
+    var xs = (window.innerWidth / 2) - (20 / 2);
+    var ys = (window.innerHeight / 2) - (20 / 2);
 
     //draw behind existing content
     //https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation
-    ctx.globalCompositeOperation = 'destination-over';
+    //ctx.globalCompositeOperation = 'destination-over';
 
      //starts with a clear canvas
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight); 
 
+    //overlay to darken stars
+    ctx.fillStyle = 'rgba(0,0,0,0.6)';
+    ctx.fillRect(0,0,innerWidth, innerHeight);
 
+    //draw sun
+    ctx.drawImage(sun, xs, ys, 20, 20);
 
-    ctx.drawImage(sun, xs, ys, 36, 36);
+    +getParam("scale") &&
+    ctx.scale(.999,.999);
 
+    //singleton
     // var earth = new Planet('EARTH');
-    // var mercury = new Planet('MERCURY');
-    // mercury.draw(ctx);
     // earth.draw(ctx);
+
     for(let p of PLANETS){
         let planet = new Planet(p);
         planet.draw(ctx);
+        if(planet.name.match(/earth/i)){
+            //draw date
+            ctx.fillStyle = 'white';
+            ctx.font = `small large serif`;
+            ctx.fillText(planet.newDateTime.toDateString().substr(4,11), xs - 20, ys - 10);
+        }
     }
     
 
 
-    //draw sun
-    //ctx.drawImage(sun, xs, ys, 36, 36);
-
-
     //recursive call to draw to continue animation
     //animationID variable allows us to start stop
     //the current animation with cancelAnimationFrame
-    animationID = window.requestAnimationFrame(draw);
-
-
-    
-
-}
-
-function draw1() {
-    var ctx = document.getElementById('canvas').getContext('2d');
-    var xs = (window.innerWidth / 2) - (36 / 2);
-    var ys = (window.innerHeight / 2) - (36 / 2);
-
-    //draw behind existing content
-    //https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation
-    ctx.globalCompositeOperation = 'destination-over';
-
-
-
-    //draw earth
-    var earth = new Planet('EARTH');
-    earth.draw(ctx);
-    
-    //var mercury = new Planet('MERCURY');
-    //mercury.draw(ctx);
-    //ctx.save();
-    
-    //draw date
-    ctx.fillStyle = 'white';
-    ctx.font = `small large serif`;
-   
-    ctx.fillText(earth.newDateTime.toDateString().substr(4,11), xs - 16, ys - 10);
-    //ctx.fillText(mercury.newDateTime.toDateString().substr(4,11), xs - 30, ys - 50);
-
-    //draw sun
-    ctx.drawImage(sun, xs, ys, 36, 36);
-    //ctx.save();
- 
-
-
-    //recursive call to draw to continue animation
-    //animationID variable allows us to start stop
-    //the current animation with cancelAnimationFrame
-    animationID = window.requestAnimationFrame(draw);
+    animationID = window.requestAnimationFrame(animate);
 
 
     
