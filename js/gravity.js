@@ -7,12 +7,21 @@ earth.src = "images/earth.png";
 
 const mx = innerWidth/2;
 const my = innerHeight/2;
+var play = true;
 
 function startGame() {
 
     massObject = new Mass(20, 20, "red", mx-200, my);
     screenArea.start();
-    window.addEventListener("click", ()=> screenArea.stop());
+    window.addEventListener("click", ()=> {
+        if (play) {
+                screenArea.stop();
+                play = false;
+            } else {
+                screenArea.start();
+                play = true;
+            }
+    });
 
  
 }
@@ -46,65 +55,76 @@ class Mass
     this.x = x;
     this.y = y;    
     this.color = color;
-    this.speedX = 0.0;
-    this.speedY = -2.00;    
+    this.speedX = 0;
+    this.speedY = -2;    
     this.gravity = 0.01;
     this.gravityX = 0.01;
-    this.gravityY = -0.01;
+    this.gravityY = 0.01;
     this.gravitySpeed = 0;
     this.gravitySpeedX = 0;
     this.gravitySpeedY = 0;
+    this.crossX = false;
+    this.crossY = false;
+    this.last = [[]];
+    this.n = 0;
 
     }
+
     update(ctx) {
         ctx = screenArea.context;
         ctx.fillStyle = this.color;
         ctx.drawImage(earth, this.x, this.y, this.width, this.height);
-        //ctx.fillRect(this.x, this.y, this.width, this.height);
-        //console.log(this.x, this.y);
+        this.last.push([this.x,this.y]);
+        if(this.last.length > 2){
+            this.last.shift();
+        }
     }
-    newPos() {
-        this.gravitySpeed += this.gravity;
 
-        this.gravitySpeedX += this.gravityX;
-        this.gravitySpeedY += this.gravityY;
+    g() {
+    
+        //REMEMBER THAT y origin in at the top
+        //so this.y < midpoint is above that point
 
-        if(this.x > mx){
+
+        if(this.x >= mx){
             this.gravityX = -0.01;
-            //this.x += this.speedX + (this.gravitySpeedX**2)*-1;
         }
         else{
             this.gravityX = 0.01;
-            //this.x += this.speedX + this.gravitySpeedX**2;
         }
+        
 
-        if(this.y < my){
+        if(this.y <= my){
             this.gravityY = 0.01;
-            //this.y += this.speedY + this.gravitySpeedY**2; 
         }
         else{
             this.gravityY = -0.01;
-            //this.y += this.speedY + (this.gravitySpeedY**2)*-1; 
         }
- 
-
-        //console.log(this.speedX, this.speedY, this.gravityX, this.gravitySpeedX);
-
-        this.x += this.speedX + this.gravitySpeedX;
-        this.y += this.speedY + this.gravitySpeedY; 
-
-        //this.y += this.speedY + this.gravitySpeed**2; 
-
-        //console.log(this.speedY + this.gravitySpeedY, this.y, my);
 
 
+        this.gravitySpeedX += this.gravityX ;
+        this.gravitySpeedY += this.gravityY ;
+
+        if(+getParam("linear")){
+    
+            this.x += this.speedX + this.gravitySpeedX;
+            this.y += this.speedY + this.gravitySpeedY; 
+        }
+        else{
+            this.x += this.speedX + (this.gravitySpeedX**2);
+            this.y += this.speedY + (this.gravitySpeedY**2); 
+
+        }
+
+    
     }
+
 }
 
 
 function animate(){
     screenArea.clear();
     screenArea.context.drawImage(sun, innerWidth/2, innerHeight/2, 30, 30);
-    massObject.newPos();
+    massObject.g();
     massObject.update(screenArea.context);
 }
