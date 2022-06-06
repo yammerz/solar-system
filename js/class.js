@@ -66,26 +66,7 @@ class CelestialObject {
 
 }
 
-/**
- * Returns the requested param value, and is optionally a decodeURIComponent or raw.
- * @param {string } param
- * @param {boolean} bool
- */
-function getParam(param, bool) {
-	let a, params = location.search.substr(1), arr = params.split('&');
 
-	for (a of arr) {
-		//If decoded
-		if (a.match(param) && bool) {
-			return decodeURIComponent(a.split('=')[1]);
-		}
-		//if not decoded
-		else if (a.match(param)) {
-			return a.split('=')[1];
-		}
-	}
-	return null;
-}
 
 
 

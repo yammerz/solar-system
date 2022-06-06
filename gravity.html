@@ -1,184 +1,26 @@
-<!doctype html>
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Line Chart</title>
-    <script src="Charts/Chart.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@0.1.1"></script>
-    <script src="utils.js"></script>
-	<script src="class.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Gravity</title>
     <style>
-        canvas {
-            -moz-user-select: none;
-            -webkit-user-select: none;
-            -ms-user-select: none;
-			width:85%;
+        body{
+            background: black;
         }
     </style>
+    <script src="js/utils.js"></script>
 </head>
 
-<body>
-	<div id="container">
-		<div id="inputs">
-			<input name="objectName" type="text" placeholder="objectName" />
-			<input name="mass1" type="text" placeholder="mass1 kg" />
-			<input name="mass2" type="text" placeholder="mass2 kg" />
-			<input name="radius" type="text" placeholder="radius meters" />
-			<input type="button" value="Make Chart" />
-		</div>
-
-	</div>
-    <br>
-    <br>
-
-	<script>
-		var timeFormat = 'MM/DD/YYYY HH:mm';
-		var e = 5.97219 * 10 ** 24;
-		var me = 70;
-		//var G = 6.673 * 10 ** -11;
-
-		function newDate(days) {
-			return moment().add(days, 'd').toDate();
-		}
-
-		function newDateString(days) {
-			return moment().add(days, 'd').format(timeFormat);
-		}
-
-		function getDistance(d) {
-			return 6371000 * d;
-		}
-
-		var color = Chart.helpers.color;
-
-		var radius = +getParam('radius');
-		var step = +getParam('step');
-
-		var orad = +getParam('oradius');
-		var ostep = +getParam('ostep');
-
-		var mass2 = +getParam('m2');
-
-
-
-		/**
-		 * Returns an array of distances from center at equal intervals
-		 * The length of the array is equal to range/step
-		 * @param {int} range in meters
-		 * @param {int} step in meter
-		 */
-		function getDistances(range, step) {
-
-			var i, ar = [];
-			for (i = step; i < range; i += step) {
-				ar.push(i);
-			}
-			return ar;
-		}
-
-		var interval = getDistances(radius, step);
-
-		var intervals = getDistances(orad, ostep);
-
-		var earthG = gravity(interval, e, mass2);
-
-		//intervals = intervals.push(intervals[0] * .1);
-
-		var objectG = gravity(intervals, getSphericalMass(.1), mass2);
-
-		var earth = {
-			type: 'line',
-			data: {
-				labels: interval,
-				datasets: [{
-					label: 'Earth gravity m/s at distance',
-					backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
-					borderColor: window.chartColors.red,
-					fill: true,
-					data: earthG,
-				}
-
-				]
-			}
-		};
-
-		var object = {
-			type: 'line',
-			data: {
-				labels: intervals,
-				datasets: [{
-					label: 'Object gravity m/s at distance',
-					backgroundColor: color(window.chartColors.green).alpha(0.5).rgbString(),
-					borderColor: window.chartColors.green,
-					fill: true,
-					data: objectG,
-				}
-
-				]
-			}
-		};
-
-		function gravity(steps, m1, m2) {
-			var arr = [];
-			for (s of steps) {
-				var f = G * (m1 * m2) / (s ** 2);
-				arr.push(f / 9.801);
-			}
-
-
-			return arr;
-		}
-
-
-		/**
-		 * Returns the mass of an earth density (5513kg/m³) object
-		 * @param {number} diameter in meters
-		 * cm = .01, mm = .001
-		 */
-		function getCubicMass(diameter, bool) {
-			return 5513 * diameter ** 3;
-		}
-
-		function getSphericalMass(radius) {
-			return 5513 * (4 / 3 * Math.PI * radius ** 3);
-		}
-
-
-		var colorNames = Object.keys(window.chartColors);
-
-	</script>
-	<script>
-        var makeChart = document.querySelector("input[type=button]");
-
-
-        makeChart.addEventListener("click", function (e) {
-            //get all inputs in one doc query...
-            let inputs = document.querySelectorAll("input[type=text]");
-            let objectName = inputs[0].value;
-            let mass1 = inputs[1].value;
-            let mass2 = inputs[2].value;
-            let radius = inputs[3].value;
-
-
-            window[objectName] = document.createElement("canvas");
-
-            document.querySelector("#container").insertAdjacentElement("beforeend", window[objectName]);
-
-            let ctx = window[objectName].getContext('2d');
-
-            console.log(objectName);
-
-
-            //var ctx = document.getElementById('earth').getContext('2d');
-            //window.myLine = new Chart(ctx, earth);
-            //var obj_ctx = document.getElementById('object').getContext('2d');
-            //window.myLine = new Chart(obj_ctx, object);
-
-
-        });
-	</script>
+    
+<body onload="startGame()">
+    
+    <script src="js/gravity.js"></script>
+    
 
 </body>
+
 
 </html>
