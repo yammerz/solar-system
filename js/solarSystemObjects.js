@@ -1,5 +1,20 @@
-const SOLARSYSTEMOBJECTS =
-{
+/* eslint-disable quotes */
+
+const ORBITCOLOR = {
+    'MERCURY':'rgba(200,150,100,0.2)',  //mercury
+    'VENUS':'rgba(153, 153, 100, 0.2)', //venus
+    'EARTH':'rgba(0, 153, 255, 0.2)', //earth
+    'MARS':'rgba(255, 0, 0, 0.2)', //mars
+    'JUPITER':'rgba(255, 125, 0, 0.2)', //Jupiter
+    'SATURN':'rgba(153, 125, 0, 0.2)', //Saturn
+    'NEPTUNE':'rgba(153, 125, 0, 0.2)', //Neptune
+    'URANUS':'rgba(153, 125, 0, 0.2)', //Uranus
+    'PLUTO':'rgba(153, 125, 0, 0.2)' //Pluto
+};
+
+
+// eslint-disable-next-line no-unused-vars
+const SOLARSYSTEMOBJECTS = {
     "SUN": {
         "Mass_kg": "1.9890000000000002e+30",
         "Diameter_km": "1.3927e+6",
@@ -13,7 +28,9 @@ const SOLARSYSTEMOBJECTS =
             "URANUS",
             "NEPTUNE",
             "PLUTO"
-        ]
+        ],
+        "name": "SUN",
+        "orbitColor": ORBITCOLOR['SUN']
     },
     "MOON": {
         "Mass_kg": "7.3476e+22",
@@ -35,7 +52,9 @@ const SOLARSYSTEMOBJECTS =
         "SurfacePressure_bars": "0",
         "NumberofMoons": "0",
         "RingSystem?": "No",
-        "GlobalMagneticField?": "No"
+        "GlobalMagneticField?": "No",
+        "name": "MOON",
+        "orbitColor": ORBITCOLOR['MOON']
     },
     "MERCURY": {
         "Mass_kg": "3.3e+23",
@@ -58,7 +77,9 @@ const SOLARSYSTEMOBJECTS =
         "NumberofMoons": "0",
         "RingSystem?": "No",
         "GlobalMagneticField?": "Yes",
-        "PlanetNumber":1
+        "PlanetNumber": 1,
+        "name": "MERCURY",
+        "orbitColor": ORBITCOLOR['MERCURY']
     },
     "VENUS": {
         "Mass_kg": "4.87e+24",
@@ -81,7 +102,9 @@ const SOLARSYSTEMOBJECTS =
         "NumberofMoons": "0",
         "RingSystem?": "No",
         "GlobalMagneticField?": "No",
-        "PlanetNumber":2
+        "PlanetNumber": 2,
+        "name": "VENUS",
+        "orbitColor": ORBITCOLOR['VENUS']
     },
     "EARTH": {
         "Mass_kg": "5.97219e+24",
@@ -104,9 +127,10 @@ const SOLARSYSTEMOBJECTS =
         "NumberofMoons": "1",
         "RingSystem?": "No",
         "GlobalMagneticField?": "Yes",
-        "PlanetNumber":3,
-        "Color":"rgba(0, 153, 255, 0.2)"
-    
+        "PlanetNumber": 3,
+        "Color": "rgba(0, 153, 255, 0.2)",
+        "name": "EARTH",
+        "orbitColor": ORBITCOLOR['EARTH']
     },
     "MARS": {
         "Mass_kg": "6.42e+23",
@@ -129,7 +153,9 @@ const SOLARSYSTEMOBJECTS =
         "NumberofMoons": "2",
         "RingSystem?": "No",
         "GlobalMagneticField?": "No",
-        "PlanetNumber":4
+        "PlanetNumber": 4,
+        "name": "MARS",
+        "orbitColor": ORBITCOLOR['MARS']
     },
     "JUPITER": {
         "Mass_kg": "1.898e+27",
@@ -152,7 +178,9 @@ const SOLARSYSTEMOBJECTS =
         "NumberofMoons": "79",
         "RingSystem?": "Yes",
         "GlobalMagneticField?": "Yes",
-        "PlanetNumber":5
+        "PlanetNumber": 5,
+        "name": "JUPITER",
+        "orbitColor": ORBITCOLOR['JUPITER']
     },
     "SATURN": {
         "Mass_kg": "5.68e+26",
@@ -175,7 +203,9 @@ const SOLARSYSTEMOBJECTS =
         "NumberofMoons": "82",
         "RingSystem?": "Yes",
         "GlobalMagneticField?": "Yes",
-        "PlanetNumber":6
+        "PlanetNumber": 6,
+        "name": "SATURN",
+        "orbitColor": ORBITCOLOR['SATURN']
     },
     "URANUS": {
         "Mass_kg": "8.68e+25",
@@ -198,7 +228,9 @@ const SOLARSYSTEMOBJECTS =
         "NumberofMoons": "27",
         "RingSystem?": "Yes",
         "GlobalMagneticField?": "Yes",
-        "PlanetNumber":7
+        "PlanetNumber": 7,
+        "name": "URANUS",
+        "orbitColor": ORBITCOLOR['URANUS']
     },
     "NEPTUNE": {
         "Mass_kg": "1.0199999999999999e+26",
@@ -221,7 +253,9 @@ const SOLARSYSTEMOBJECTS =
         "NumberofMoons": "14",
         "RingSystem?": "Yes",
         "GlobalMagneticField?": "Yes",
-        "PlanetNumber":8
+        "PlanetNumber": 8,
+        "name": "NEPTUNE",
+        "orbitColor": ORBITCOLOR['NEPTUNE']
     },
     "PLUTO": {
         "Mass_kg": "1.46e+22",
@@ -244,20 +278,12 @@ const SOLARSYSTEMOBJECTS =
         "NumberofMoons": "5",
         "RingSystem?": "No",
         "GlobalMagneticField?": "Unknown",
-        "PlanetNumber":9
+        "PlanetNumber": 9,
+        "name": "PLUTO",
+        "orbitColor": ORBITCOLOR['PLUTO']
     }
 };
 
-const ORBITCOLOR = [
-    'rgba(200,150,100,0.2)',  //mercury
-    'rgba(153, 153, 100, 0.2)', //venus
-    'rgba(0, 153, 255, 0.2)', //earth
-    'rgba(255, 0, 0, 0.2)', //mars
-    'rgba(255, 125, 0, 0.2)', //Jupiter
-    'rgba(153, 125, 0, 0.2)', //Saturn
-    'rgba(153, 125, 0, 0.2)', //Neptune
-    'rgba(153, 125, 0, 0.2)', //Uranus
-    'rgba(153, 125, 0, 0.2)' //Pluto
-];
+
 
 

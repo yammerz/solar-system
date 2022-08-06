@@ -9,6 +9,8 @@ const mx = innerWidth/2;
 const my = innerHeight/2;
 var play = true;
 
+const params = new URLSearchParams(location.search);
+
 function startGame() {
 
     massObject = new Mass(20, 20, "red", mx-200, my);
@@ -40,7 +42,7 @@ var screenArea = {
     },    
     clear : function() {
        
-        !+getParam("orbit") &&
+        !+params.get("orbit") &&
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
      
     }
@@ -105,7 +107,7 @@ class Mass
         this.gravitySpeedX += this.gravityX ;
         this.gravitySpeedY += this.gravityY ;
 
-        if(+getParam("linear")){
+        if(+params.get("linear")){
     
             this.x += this.speedX + this.gravitySpeedX;
             this.y += this.speedY + this.gravitySpeedY; 
