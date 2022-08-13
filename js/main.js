@@ -33,7 +33,7 @@ const init = () => {
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
 
-	sun.src = "images/sun.png";
+	sun.src = "assets/sun.png";
 
 	if (planets.length === 0) {
 		for (let p of options.planets) {

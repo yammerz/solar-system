@@ -262,7 +262,7 @@ class Planet {
 	 */
 	#init() {
 		this.image = new Image();
-		this.image.src = `images/${this.name.toLowerCase()}.png`;
+		this.image.src = `assets/${this.name.toLowerCase()}.png`;
 
 		this.size = (this.Diameter_km / SOLARSYSTEMOBJECTS["EARTH"].Diameter_km) * 12;
 
@@ -281,7 +281,7 @@ class Planet {
 
 		if (this.name.match(/earth/i)) {
 			this.moon = new Image();
-			this.moon.src = "images/moon.png";
+			this.moon.src = "assets/moon.png";
 			this.b = this.a * 0.04;
 		}
 	}
