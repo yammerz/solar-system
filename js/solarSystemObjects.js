@@ -4,12 +4,12 @@ const ORBITCOLOR = {
 	'MERCURY':'rgba(200,150,100,0.2)',  //mercury
 	'VENUS':'rgba(153, 153, 100, 0.2)', //venus
 	'EARTH':'rgba(0, 153, 255, 0.2)', //earth
-	'MARS':'rgba(255, 0, 0, 0.2)', //mars
-	'JUPITER':'rgba(255, 125, 0, 0.2)', //Jupiter
-	'SATURN':'rgba(153, 125, 0, 0.2)', //Saturn
-	'NEPTUNE':'rgba(153, 125, 0, 0.2)', //Neptune
-	'URANUS':'rgba(153, 125, 0, 0.2)', //Uranus
-	'PLUTO':'rgba(153, 125, 0, 0.2)' //Pluto
+	'MARS':'rgba(255, 150, 130, 0.2)', //mars
+	'JUPITER':'rgba(255, 165, 0, 0.2)', //Jupiter
+	'SATURN':'rgba(250, 250, 250, 0.2)', //Saturn
+	'URANUS':'rgba(102, 178, 255, 0.2)', //Uranus
+	'NEPTUNE':'rgba(0, 0, 255, 0.2)', //Neptune
+	'PLUTO':'rgba(150, 150, 150, 0.2)' //Pluto no image
 };
 
 

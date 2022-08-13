@@ -17,7 +17,13 @@ const options = (function () {
 		size: size,
 		dx: window.innerWidth / 2 - size / 2,//middle x
 		dy: window.innerHeight / 2 - size / 2,//middle y
-		planets: ["MERCURY", "VENUS", "EARTH"],// ? Add remaining planet images 
+		planets: [
+			"MERCURY", 
+			"VENUS", 
+			"EARTH", 
+			"MARS"
+			//,"JUPITER"//Jupiter scales to much larger than the sun with current display
+		],// ? Add remaining planet images 
 		controls: new Controls(["KEYS", "AUTO"][0])
 	};
 })();
