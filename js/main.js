@@ -1,95 +1,122 @@
-﻿//date is used to calculate the ordbit
+﻿/*global SOLARSYSTEMOBJECTS, Planet, Controls*/
 const date = new Date();
-const params = new URLSearchParams(location.search);
-const options = {
-	dateTime: new Date(
-		date.getFullYear(), //yyyy
-		date.getMonth(), //m
-		date.getDate() //d
-	).getTime(),
+const options = (function () {
+	//The options params to pass into Planet constructor.
 
-	orbitPath: +params.get("orbitPath"), //show the orbitPath boolean 1 or 0
-	scale: +params.get("scale"), //
-	speed: +params.get("speed"),
-	size: 20
-};
-const sun = new Image();
+	//The size of the sun.
+	const size = 20;
+
+	return {
+		dateTime: new Date(
+			date.getFullYear(), //yyyy
+			date.getMonth(), //m
+			date.getDate() //d
+		).getTime(),
+		scale: false, //
+		speed: 1,
+		size: size,
+		dx: window.innerWidth / 2 - size / 2,//middle x
+		dy: window.innerHeight / 2 - size / 2,//middle y
+		planets: ["MERCURY", "VENUS", "EARTH"],// ? Add remaining planet images 
+		controls: new Controls(["KEYS", "AUTO"][0])
+	};
+})();
 const canvas = document.querySelector("#canvas");
 const ctx = canvas.getContext("2d");
-
+const sun = new Image();
+const planets = [];
 let animationID;
 let play = true;
 
-function init() {
+const init = () => {
 	//set canvas to full width and height
-	canvas.width = innerWidth;
-	canvas.height = innerHeight;
+	canvas.width = window.innerWidth;
+	canvas.height = window.innerHeight;
 
 	sun.src = "images/sun.png";
 
-	//initialize the animation
-	window.requestAnimationFrame(animate);
-}
-
-function animate() {
-	const PLANETS = ["MERCURY", "VENUS", "EARTH"];
-	const size = 20;
-	const xs = window.innerWidth / 2 - size / 2;
-	const ys = window.innerHeight / 2 - size / 2;
-
-	//starts with a clear canvas
-	ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-
-	//overlay to darken stars
-	ctx.fillStyle = "rgba(0,0,0,0.7)";
-	ctx.fillRect(0, 0, innerWidth, innerHeight);
-
-	//draw sun
-	ctx.drawImage(sun, xs, ys, size, size);
-
-	//scale to create a zoom out/away effect
-	+params.get("scale") && ctx.scale(0.999, 0.999);
-
-	for (let p of PLANETS) {
-		// eslint-disable-next-line no-undef
-		let planet = new Planet(SOLARSYSTEMOBJECTS[p], options);
-		planet.draw(ctx);
-		if (planet.name.match(/earth/i)) {
-			//draw date
-			ctx.fillStyle = "white";
-			ctx.font = "small large serif";
-			const xOffset = xs - size / 2;
-			const yOffset = ys - size / 2;
-			ctx.fillText(
-				planet.newDateTime.toDateString().substring(4, 11),
-				xOffset,
-				yOffset
-			);
+	if (planets.length === 0) {
+		for (let p of options.planets) {
+			let planet = new Planet(SOLARSYSTEMOBJECTS[p], options);
+			planets.push(planet);
 		}
 	}
 
-	//recursive call to draw to continue animation
-	//animationID variable allows us to start stop
-	//the current animation with cancelAnimationFrame
-	//which is called from the window click eventlistener
-	animationID = window.requestAnimationFrame(animate);
-}
+	//initialize the animation
+	window.requestAnimationFrame(animate);
+};
 
-init();
+/**
+ * Must redraw the canvas each frame (draw) to prevent trails and stacked images.
+ */
+const refreshCanvas = () => {
+	//starts with a clear canvas
+	ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
+	//overlay to darken stars, because universe image to bright
+	ctx.fillStyle = "rgba(0,0,0,0.7)";
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+	//draw sun in the center of the canvas
+	ctx.drawImage(sun, options.dx, options.dy, options.size, options.size);
+
+};
+
+/**
+ * Animate the planets in their respective orbits.
+ * Recursively call the window requestAnimationFrame
+ * 60/second.
+ */
+const animate = () => {
+	
+	//start/stop animation with spacebar
+	if(!options.controls.pause){
+
+		refreshCanvas();
+		//scale to create a zoom in/out effect
+		options.controls.zoomOut && ctx.scale(0.999, 0.999);
+		options.controls.zoomIn && ctx.scale(1.001, 1.001);
+
+		//loop planets draw() to animate
+		for (let planet of planets) {
+			planet.draw(ctx);
+		}
+
+		//recursive call to draw to continue animation
+		//animationID variable allows us to start stop
+		//the current animation with cancelAnimationFrame
+		//which is called from the window click eventlistener
+	
+		animationID = window.requestAnimationFrame(animate);
+	}
+	else{
+		//allow animate() to continue to run with a call limit
+		setTimeout(() => {
+			animate();
+		}, 100);
+
+	}
+};
+
+
+// Attach a click listener to the window to start/stop the animation.
 window.addEventListener("click", () => {
 	if (play) {
 		window.cancelAnimationFrame(animationID);
 		play = false;
 	} else {
+		//call init to restart
 		init();
 		play = true;
 	}
 });
 
-// eslint-disable-next-line no-console
-console.info(
-	`Earth completes 1 ordbit in 60 seconds with speed param set to 1.\n
-	Speed == minutes per orbit. \n
-	The planetary motion animation is using Date object milliseconds`
-);
+
+
+console.info("%c Solar system is not shown to scale.", "color:red");
+console.info("%c Earth completes 1 ordbit in ~61 seconds with default speed (1).", "color:orange");
+console.info("%c Increase/decrease the speed of the orbits with keyboard +/-", "color:green");
+console.info("%c Toggle visibility of orbitPaths t or f.", "color:blue");
+
+
+init();

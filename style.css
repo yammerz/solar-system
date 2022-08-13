@@ -6,6 +6,10 @@ body {
     background-size: 25%;
 }
 
+canvas{
+    display: block;
+}
+
 svg:not(:root) {
     display: block;
 }
