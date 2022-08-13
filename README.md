@@ -16,4 +16,4 @@ file://path-to-solar-system/index.html
 
 Click the green Code button above and select Download ZIP.
 
-[EARTH]:![Earth](/assets/{earth}.{png})
+[EARTH]:![earth](https://user-images.githubusercontent.com/6293708/184466648-2efb6d4c-17a6-45a8-8538-30a63bba3a5c.png)
