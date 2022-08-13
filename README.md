@@ -17,3 +17,4 @@ file://path-to-solar-system/index.html
 ## Download
 
 Click the green Code button above and select Download ZIP.
+
