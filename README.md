@@ -27,3 +27,5 @@ For easiest access, click the green Code button above and select Download ZIP.
 
 Follow instructions above in Accessibility for file protocol
 &#xB9; Git required.
+
+Alternatively, you can see the animation here: https://yammerz.github.io/solar-system-animation/
