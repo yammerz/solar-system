@@ -1,0 +1,14 @@
+git init - initialize folder as repo
+
+git checkout branch2 filename - update current branch1 < branch2 filename
+
+git checkout branch2 - switch to branch2 from branch1
+
+git status - show status current b
+
+ls - aka dir, ssh command to show files/folders
+
+TO UPDATE main branch: (*Do not update main directly, instead update dev then pull via checkout)
+switch to main:
+git checkout main
+git checkout branc folder/file
