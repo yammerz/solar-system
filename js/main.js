@@ -23,8 +23,8 @@ const options = (function () {
 			"EARTH", 
 			"MARS"
 			//,"JUPITER"//Jupiter scales to much larger than the sun with current display
-		],// ? Add remaining planet images 
-		controls: new Controls(["KEYS", "AUTO"][0])
+		],
+		controls: new Controls(["KEYS", "AUTO"][0])//? Add functionality to AUTO
 	};
 })();
 const canvas = document.querySelector("#canvas");
@@ -116,13 +116,5 @@ window.addEventListener("click", () => {
 		play = true;
 	}
 });
-
-
-
-console.info("%c Solar system is not shown to scale.", "color:red");
-console.info("%c Earth completes 1 ordbit in ~61 seconds with default speed (1).", "color:orange");
-console.info("%c Increase/decrease the speed of the orbits with keyboard +/-", "color:green");
-console.info("%c Toggle visibility of orbitPaths t or f.", "color:blue");
-
 
 init();
