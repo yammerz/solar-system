@@ -12,3 +12,23 @@ TO UPDATE main branch: (*Do not update main directly, instead update dev then pu
 switch to main:
 git checkout main
 git checkout branc folder/file
+
+Update remote:
+git push origin main
+
+Update main from develop:
+git switch main 
+git merge develop
+
+
+
+REMOVE FILE: 
+git rm file
+
+see git mergetool
+
+
+git remote rm origin
+git remote add origin https://github.com/yammerz/solar-system-animation.git
+
+
