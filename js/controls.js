@@ -5,7 +5,8 @@
  */
 class Controls {
 	/**
-	 *Creates an instance of Controls.
+	 * The animation controls: start, stop, speed, and toggle orbitPath.
+	 * Creates an instance of Controls.
 	 * @param {*} type options property to select auto
 	 * or keyboard.
 	 * @memberof Controls

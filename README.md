@@ -28,15 +28,16 @@ Follow instructions above in Accessibility for file protocol
 
 Alternatively, you can see the animation here: https://yammerz.github.io/solar-system-animation/
 
-### Keyboard Controls
+* ### Keyboard Controls
 
-* Spacebar: stop/start (Also screen click/touch)
-* +: increase speed
-* -: decrease speed
-* t: show orbitPaths
-* f: hide orbitPaths
+  * Spacebar: stop/start (Also screen click/touch)
+  * +: increase speed
+  * -: decrease speed
+  * t: show orbitPaths
+  * f: hide orbitPaths
 
-### Notes
+* ### Notes
 
-* Solar system is not shown to scale.
-* Earth completes 1 ordbit in ~60 seconds with default speed. Other planet orbit are scale from Earth's speed.
+  * Solar system is not shown to scale.
+  * Earth completes 1 ordbit in ~60 seconds with default speed. Other planet orbit are scale from Earth's speed.
+

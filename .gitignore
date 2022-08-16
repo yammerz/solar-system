@@ -7,6 +7,8 @@ assets/neptune.xcf
 assets/saturn.xcf
 assets/sun.xcf
 assets/uranus.xcf
+js/custom.js
+js/gravity.js
 chart.html
 gravity.html
 primes.html
