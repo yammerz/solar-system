@@ -1,5 +1,4 @@
 /* eslint-disable quotes */
-
 const ORBITCOLOR = {
 	'MERCURY':'rgba(200,150,100,0.2)',  //mercury
 	'VENUS':'rgba(153, 153, 100, 0.2)', //venus
@@ -11,7 +10,6 @@ const ORBITCOLOR = {
 	'NEPTUNE':'rgba(0, 0, 255, 0.2)', //Neptune
 	'PLUTO':'rgba(150, 150, 150, 0.2)' //Pluto no image
 };
-
 
 // eslint-disable-next-line no-unused-vars
 const SOLARSYSTEMOBJECTS = {
