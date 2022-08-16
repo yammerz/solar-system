@@ -26,7 +26,7 @@ For easiest access, click the green Code button above and select Download ZIP.
 Follow instructions above in Accessibility for file protocol
 &#xB9; Git required.
 
-Alternatively, you can see the animation here: https://yammerz.github.io/solar-system-animation/
+Alternatively, you can see the animation here: [demo](https://yammerz.github.io/solar-system-animation/)
 
 * ### Keyboard Controls
 
@@ -40,4 +40,3 @@ Alternatively, you can see the animation here: https://yammerz.github.io/solar-s
 
   * Solar system is not shown to scale.
   * Earth completes 1 ordbit in ~60 seconds with default speed. Other planet orbit are scale from Earth's speed.
-
